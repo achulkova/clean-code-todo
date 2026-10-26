@@ -51,16 +51,16 @@ const editTask = function () {
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('label');
   const editButton = listItem.querySelector('.edit');
-  const isEditMode = listItem.classList.contains('editMode');
-  if (isEditMode) {
-    label.innerText = editInput.value;
-    editButton.innerText = 'Edit';
-  } else {
+  if (!listItem.classList.contains('editMode')) {
     editInput.value = label.innerText;
     editButton.innerText = 'Save';
+    listItem.classList.add('editMode');
+    return;
   }
 
-  listItem.classList.toggle('editMode');
+  label.innerText = editInput.value;
+  editButton.innerText = 'Edit';
+  listItem.classList.remove('editMode');
 };
 
 const deleteTask = function () {
